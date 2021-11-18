@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Load JSON File Locally by Javascript Without JQuery</title>
+        <script type="text/javascript" src="data.json"></script>
+        <script type="text/javascript" src="myscript.js"></script>
+    </head>
+    <body >
+        testing JS object and JSON
+        <p id="works"></p>
+        <p id="demo"></p>
+      
+        <script>              //-- JS objekt ---------------------------------> 
+
+            var service = {
+                            name: "Home page dev",
+                         branch: "Web development",
+            customer1: "Swedish government",
+            email: function(){
+                return 'MegaStructure@awsome.com';
+            },
+            customers:["ABB", "Tesla"]
+       }
+       service1 = JSON.stringify(service);       
+       service2 = JSON.parse(service1);
+     
+       var works = [                        //Array av objekt ---------------------       
+        {
+            name:"web development",         // ett objekt....
+            location:"Örebro",
+            fee:"400 kr/h"
+        },
+        {
+            name:"IC uppgrade",            //ett till objekt
+            location:"Vancouver",
+            fee:"200 kr/h"
+        }
+       ]
+       console.log(service1);
+       console.log(service2);
+       console.log(service.customers[1]);
+       console.log(works[0]);
+       console.log(works[0].location);
+
+       var result = '';
+       
+        for(var i = 0; i < works.length;i++)
+        {
+            result += '<li>'+ works[i].location+'</li>';
+        }
+        document.getElementById('works').innerHTML = result;        
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               
+                var JS_result = JSON.parse(xhttp.responseText);
+
+                var jobsDone = JS_result.DeliveredWorks;
+
+                console.log(JS_result);
+
+                var jobsDelivered = '';
+
+                for(var i = 0; i < jobsDone.length;i++)
+               {
+                 jobsDelivered += '<li>'+ jobsDone[i].fee+'</li>';
+               }
+               document.getElementById("demo").innerHTML = jobsDelivered;
+            }
+        };
+        xhttp.open("GET", "data.json", true);
+        xhttp.send();
+       </script>       
+    </body>
+</html>

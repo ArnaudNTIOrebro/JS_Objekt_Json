@@ -1,0 +1,14 @@
+{
+    "DeliveredWorks": [
+    {
+        "name":"web development",
+        "location":"Örebro",
+        "fee":"600 kr/h"
+    },
+    {
+        "name":"IC uppgrade",
+        "location":"Vancouver",
+        "fee":"700 kr/h"
+    }
+  ]
+}
